@@ -10,7 +10,6 @@ namespace AccountExternalFunction
     public class FRole : IFRole
     {
         private IDRole _iDRole;
-
         public FRole(IDRole iDRole)
         {
             _iDRole = iDRole;
@@ -21,6 +20,7 @@ namespace AccountExternalFunction
             _iDRole = new DRole();
 
         }
+
         #region Create
         public Role Create(int createBy, Role role)
         {

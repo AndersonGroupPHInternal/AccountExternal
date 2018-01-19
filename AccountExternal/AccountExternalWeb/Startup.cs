@@ -41,8 +41,6 @@ namespace AccountExternalWeb
                 AuthenticationType = "ApplicationCookie",
                 LoginPath = new PathString("/Credential/Login")
             });
-
-
         }
     }
 }
