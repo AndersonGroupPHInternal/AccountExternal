@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AccountExternalEntity
 {
+    [Table("CredentialRole")]
     public class ECredentialRole : EBase
     {
         [ForeignKey("Credential")]

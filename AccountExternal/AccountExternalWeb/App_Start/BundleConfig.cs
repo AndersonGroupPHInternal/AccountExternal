@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace AccountExternalWeb.App_Start
 {
@@ -16,7 +12,7 @@ namespace AccountExternalWeb.App_Start
                 //.IncludeDirectory("~/Scripts/Angular/Directive", "*.js", true)
                 .IncludeDirectory("~/Scripts/Angular/Service", "*.js", true));
 
-            System.Web.Optimization.BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
