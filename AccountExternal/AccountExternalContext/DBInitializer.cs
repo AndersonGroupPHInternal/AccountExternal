@@ -16,6 +16,24 @@ namespace AccountExternalContext
                     Name = "ExternalAccountAdministrator"
                 });
 
+            context.Roles.Add(
+                new ERole
+                {
+                    Name = "AndersonNotificationAdministrator"
+                });
+
+            context.Roles.Add(
+                new ERole
+                {
+                    Name = "AndersonNotificationEmailNotification"
+                });
+
+            context.Roles.Add(
+                new ERole
+                {
+                    Name = "SurveyAdministrator"
+                });
+
             string password = "password";
             string salt = BCrypt.Net.BCrypt.GenerateSalt();
             string passwordHash = BCrypt.Net.BCrypt.HashPassword(password + salt);
