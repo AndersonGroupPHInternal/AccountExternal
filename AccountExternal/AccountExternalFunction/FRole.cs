@@ -10,7 +10,6 @@ namespace AccountExternalFunction
     public class FRole : IFRole
     {
         private IDRole _iDRole;
-
         public FRole(IDRole iDRole)
         {
             _iDRole = iDRole;
@@ -21,6 +20,7 @@ namespace AccountExternalFunction
             _iDRole = new DRole();
 
         }
+
         #region Create
         public Role Create(int createBy, Role role)
         {
@@ -86,8 +86,10 @@ namespace AccountExternalFunction
 
                 CreatedBy = role.CreatedBy,
                 UpdatedBy = role.UpdatedBy,
+
                 RoleId = role.RoleId,
-                Name = role.Name
+                Name = role.Name,
+                Description = role.Description,
             };
         }
 
@@ -100,8 +102,10 @@ namespace AccountExternalFunction
 
                 CreatedBy = eRole.CreatedBy,
                 UpdatedBy = eRole.UpdatedBy,
+
                 RoleId = eRole.RoleId,
-                Name = eRole.Name
+                Name = eRole.Name,
+                Description = eRole.Description,
             };
         }
         private List<Role> Roles(List<ERole> eRoles)
@@ -115,7 +119,8 @@ namespace AccountExternalFunction
                 RoleId = a.RoleId,
                 UpdatedBy = a.UpdatedBy,
 
-                Name = a.Name
+                Name = a.Name,
+                Description = a.Description
             }).ToList();
         }
         #endregion

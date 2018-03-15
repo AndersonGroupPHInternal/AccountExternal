@@ -20,7 +20,7 @@
                 @*Start Credential Dropdown*@
                 <li>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <i class="fa fa-credit-card" aria-hidden="true"></i>
                         Credential
                     </a>
                     <ul class="dropdown-menu">
@@ -43,7 +43,7 @@
                 @*Start Role Dropdown*@
                 <li>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <i class="fa fa-group" aria-hidden="true"></i>
                         Role
                     </a>
                     <ul class="dropdown-menu">
@@ -65,7 +65,28 @@
                 <li><a href="~/Home/About"><i class="fa fa-info" aria-hidden="true"></i> About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">@Cookies.Username</a></li>
+                @*Start User Dropdown*@
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user" aria-hidden="true"> @Cookies.Username</i>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                          <li>
+                            <a class="nav-link" href="~/Credential/ChangePassword" hidden="hidden"> 
+                                <i class="fa fa-key" aria-hidden="true"></i>
+                                Change Password
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="~/Credential/Signout">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                Sign Out
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @*End User Dropdown*@
             </ul>
         </div>
     </nav>

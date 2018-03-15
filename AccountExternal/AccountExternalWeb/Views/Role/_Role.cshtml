@@ -1,13 +1,24 @@
-﻿
+﻿@using AccountExternalModel
+@model Role
+
 <input type="hidden" name="RoleId" value="@Model.RoleId" />
 @{
     Html.RenderPartial("_AuditColumns");
 }
 <div class="form-group">
     <label for="Name">Role</label>
-    <input type="text" class="form-control" name="Name" placeholder="Enter Rolename" value="@Model.Name">
+    <input type="text" class="form-control" name="Name" placeholder="Role name" value="@Model.Name" required>
+</div>
+
+<div class="form-group">
+    <label for="Description">Description</label>
+    @Html.TextAreaFor(m => m.Description, 10, 10, new { @class = "form-control", placeholder = "Description", required = "required"})
 </div>
 
 <div class="form-group">
     <input type="submit" class="btn btn-primary" value="Submit" />
 </div>
+
+<style>
+    textarea{ resize: none; }
+</style>

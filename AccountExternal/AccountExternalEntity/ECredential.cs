@@ -13,15 +13,18 @@ namespace AccountExternalEntity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int CredentialId { get; set; }
-
+        
         [StringLength(100)]
         public string Email { get; set; }
+
         [Required]
         [StringLength(100)]
         public string Password { get; set; }
+
         [Required]
         [StringLength(100)]
         public string Salt { get; set; }
+
         [Required]
         [StringLength(100)]
         [Index("Credential_Unique", 1, IsUnique = true)]

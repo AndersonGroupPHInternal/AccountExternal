@@ -23,7 +23,6 @@ namespace AccountExternalWeb
 
         public void ConfigureOAuth(IAppBuilder app)
         {
-
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
@@ -33,8 +32,6 @@ namespace AccountExternalWeb
             };
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-
-
         }
 
         public void ConfigureCookie(IAppBuilder app)
@@ -44,8 +41,6 @@ namespace AccountExternalWeb
                 AuthenticationType = "ApplicationCookie",
                 LoginPath = new PathString("/Credential/Login")
             });
-
-
         }
     }
 }

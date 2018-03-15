@@ -33,7 +33,7 @@
             Read();
             if (credentialId != undefined)
                 ReadAssignedRole();
-        }
+        }   
 
         function Read() {
             RoleService.Read()

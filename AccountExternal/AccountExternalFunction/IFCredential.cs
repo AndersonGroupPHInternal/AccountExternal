@@ -18,6 +18,7 @@ namespace AccountExternalFunction
         #endregion
 
         #region Update
+        bool ChangePassword(int updatedBy, Credential credential);
         Credential Update(int updatedBy, Credential credential);
         #endregion
 

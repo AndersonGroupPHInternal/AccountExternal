@@ -95,6 +95,28 @@ namespace AccountExternalWeb.Controllers
         #endregion
 
         #region Update
+        [MvcAuthorizationFilterAttribute(false, "Credential", "Login", new string[] { })]
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [MvcAuthorizationFilterAttribute(false, "Credential", "Login", new string[] {  })]
+        [HttpPost]
+        public ActionResult ChangePassword(Credential credential)
+        {
+            if (ModelState.IsValid)
+            {
+                var createdCredential = _iFCredential.ChangePassword(CredentialId, credential);
+            }
+            else if (!ModelState.IsValid)
+            {
+                return View(credential);
+            }
+            return Redirect("~/Home");
+        }
+
         [HttpGet]
         public ActionResult Update(int id)
         {
@@ -108,6 +130,15 @@ namespace AccountExternalWeb.Controllers
             _iFCredentialRole.Create(CredentialId, createdCredential.CredentialId, credential.CredentialRoles);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Signout()
+        {
+            HttpCookie credentialCookies = new HttpCookie("Credential");
+            credentialCookies.Expires = DateTime.Now.AddHours(-1);
+            Response.Cookies.Add(credentialCookies);
+            return Redirect("~/Home");
+        }
         #endregion
 
         #region Delete
@@ -117,6 +148,10 @@ namespace AccountExternalWeb.Controllers
             _iFCredential.Delete(id);
             return Json(string.Empty);
         }
+        #endregion
+
+        #region Other Function
+
         #endregion
     }
 }

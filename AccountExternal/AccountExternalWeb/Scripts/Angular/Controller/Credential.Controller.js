@@ -39,7 +39,6 @@
                         hide: true,
                         addclass: "stack-bottomright"
                     });
-
                 });
         }
 

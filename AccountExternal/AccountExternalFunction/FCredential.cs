@@ -15,7 +15,7 @@ namespace AccountExternalFunction
         {
             _iDCredential = iDCredential;
         }
-
+       
         public FCredential()
         {
             _iDCredential = new DCredential();
@@ -81,17 +81,38 @@ namespace AccountExternalFunction
         #endregion
 
         #region Update
+        public bool ChangePassword(int updatedBy, Credential credential)
+        {
+            ECredential eCredential = _iDCredential.Read<ECredential>(a => a.Username == credential.Username && a.IsActive == true);
+            if (eCredential != null && BCrypt.Net.BCrypt.Verify(credential.Password + eCredential.Salt, eCredential.Password))
+            {
+                eCredential.Salt = BCrypt.Net.BCrypt.GenerateSalt();
+                eCredential.Password = BCrypt.Net.BCrypt.HashPassword(credential.NewPassword + eCredential.Salt);
+                eCredential = _iDCredential.Update(eCredential);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public Credential Update(int updatedBy, Credential credential)
         {
             var eCredential = ECredential(credential);
             eCredential.UpdatedDate = DateTime.Now;
             eCredential.UpdatedBy = updatedBy;
 
-            eCredential.Salt = BCrypt.Net.BCrypt.GenerateSalt();
-            eCredential.Password = BCrypt.Net.BCrypt.HashPassword(credential.Password + eCredential.Salt);
+            var oldECredential = _iDCredential.Read<ECredential>(a => a.CredentialId == credential.CredentialId);
+            eCredential.Salt = oldECredential.Salt;
+            eCredential.Password = oldECredential.Password;
+
+            //eCredential.Salt = BCrypt.Net.BCrypt.GenerateSalt();
+            //eCredential.Password = BCrypt.Net.BCrypt.HashPassword(credential.Password + eCredential.Salt);
 
             eCredential = _iDCredential.Update(eCredential);
             return Credential(eCredential);
+
         }
         #endregion
 
@@ -136,7 +157,8 @@ namespace AccountExternalFunction
                 CredentialId = eCredential.CredentialId,
 
                 Email = eCredential.Email,
-                Username = eCredential.Username
+                Username = eCredential.Username,
+                Password = eCredential.Password,
             };
         }
 
@@ -155,6 +177,7 @@ namespace AccountExternalFunction
 
                 Email = a.Email,
                 Username = a.Username,
+                Password = a.Password,
 
                 CredentialRoles = a.CredentialRoles.Select(b =>
                     new CredentialRole
@@ -177,7 +200,8 @@ namespace AccountExternalFunction
                             RoleId = b.Role.RoleId,
                             UpdatedBy = b.Role.UpdatedBy,
 
-                            Name = b.Role.Name
+                            Name = b.Role.Name,
+                            //Description = b.Role.Description,
                         }
                     }).ToList()
             }).ToList();

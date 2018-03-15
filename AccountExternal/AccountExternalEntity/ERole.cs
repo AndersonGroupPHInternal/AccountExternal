@@ -17,6 +17,8 @@ namespace AccountExternalEntity
         [StringLength(100)]
         [Index("Role_Unique", 1, IsUnique = true)]
         public string Name { get; set; }
+        
+        public string Description { get; set; }
 
         public ICollection<ECredentialRole> CredentialRoles { get; set; }
     }
